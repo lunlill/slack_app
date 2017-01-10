@@ -3,7 +3,7 @@ var mongoose      = require('mongoose'),
     path          = require('path'),
     models_path   = path.join( __dirname, "../models"),
     reg           = new RegExp( ".js$", "i" ),
-    dbURI         = 'mongodb://heroku_126flrb8:730l3i62ugdfpfcupd4ntorf96@ds133368.mlab.com:33368/heroku_126flrb8';
+    dbURI         = process.env.MONGODB_URI;
 
 mongoose.connect( dbURI );
 
