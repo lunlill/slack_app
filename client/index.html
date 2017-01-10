@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ProsperWorks</title>
+		<meta charset="utf-8">
+		<link rel="icon" href="/assets/images/pw_icon.png" type="image/png">
+		<base href="/">
+		<meta name="discription" content="ProsperWorks connects to slack.">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Angular -->
+		<script src="angular/angular.js"></script>
+		<script src="angular-aria/angular-aria.js"></script>
+		<script src="angular-animate/angular-animate.js"></script>
+		<script src="angular-route/angular-route.js"></script>
+		<script src="angular-messages/angular-messages.js"></script>
+
+		<!-- Angular Material -->
+		<script src="angular-material/angular-material.js"></script>
+		<link rel="stylesheet" href="angular-material/angular-material.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<!-- Angular Material Table -->
+		<link href="angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="angular-material-data-table/dist/md-data-table.min.js"></script>
+		
+		<script src='assets/app.js'></script>
+		<script src='assets/factories/accountsFactory.js'></script>
+		<script src='assets/controllers/homeController.js'></script>
+		<script src='assets/controllers/completeController.js'></script>
+		<script src='assets/controllers/indexController.js'></script>
+
+		<style type="text/css">
+			.error {
+				color: red;
+				padding-top: 24px;
+			}
+			form {
+				overflow-y: auto;
+				padding: 10px 20px;
+			}
+			.md-body-1{
+				color: #777777;
+			}
+		</style>
+	</head>
+
+	<body ng-app="app">
+
+		<md-toolbar class="md-hue-2" ng-cloak>
+			<div class="md-toolbar-tools">
+				<!-- <md-button class="md-icon-button" aria-label="Settings">
+					<md-icon class="material-icons">menu</md-icon>
+				</md-button> -->
+
+				<h2 flex md-truncate>ProsperWorks Slack Addon</h2>
+
+				<md-button class="md-icon-button" aria-label="Home" href="/">
+					<md-icon class="material-icons">home</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+
+		<md-content flex layout-padding style="width: 70%; margin: auto;">
+			<div ng-view></div>
+		</md-content>
+	</body>
+</html>

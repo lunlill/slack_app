@@ -1,0 +1,73 @@
+<div ng-cloak>
+	<h4 class="md-title">Please enter the ProsperWorks API keys to subscribe notifications for your team.</h4>
+
+	<md-card>
+	<form ng-submit="addAccount()" md-whiteframe="6">
+		<div layout="row">
+			<md-input-container flex="50">
+				<label>ProsperWorks User Email</label>
+				<input required type="email" name="pw_email" ng-model="account.pw_email" ng-pattern="/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" />
+
+				<div ng-messages="pw_email.$error" role="alert">
+					<div ng-message-exp="['required', 'pattern']">
+						Invalid email address.
+					</div>
+				</div>
+			</md-input-container>
+			<div flex="50">
+				<p class="error" ng-if="errors.pw_email">*{{ errors.pw_email }}</p>
+			</div>
+		</div>
+
+		<div layout="row">
+			<md-input-container flex="50">
+				<label>ProsperWorks Access Token</label>
+				<input required type="text" name="pw_token" ng-model="account.pw_token" />
+
+				<div ng-messages="pw_token.$error" role="alert">
+					<div ng-message-exp="['required']">
+						API token required.
+					</div>
+				</div>
+			</md-input-container>
+			<div flex="50">
+				<p class="error" ng-if="errors.pw_token">*{{ errors.pw_token }}</p>
+			</div>
+		</div>
+
+		<div layout="row" flex="50">
+			<div>
+				<div>
+					<md-checkbox ng-model="lead">Leads</md-checkbox>
+				</div>
+				<div>
+					<md-checkbox ng-model="opportunity">Opportunities</md-checkbox>
+				</div>
+				<div>
+					<md-checkbox ng-model="task">Tasks</md-checkbox>
+				</div>
+			</div>
+			<div flex="50">
+				<p class="error" ng-if="errors.topics">*{{ errors.topics }}</p>
+			</div>
+		</div>
+
+		<md-button type="submit" class="md-accent md-raised" style="margin-left: -2px;">Submit</md-button>
+
+	</form>
+	</md-card>
+
+	<br>
+	<p class="md-body-1">If you don't have an API key from ProsperWorks, you can get it from these steps:</p>
+	<md-list flex>
+		<md-list-item>
+			<span class="md-body-1">Log in to your dashboard on ProsperWorks.com</span>
+		</md-list-item>
+		<md-list-item>
+			<span class="md-body-1">From the top-left menu, choose System Settings</span>
+		</md-list-item>
+		<md-list-item>
+			<span class="md-body-1">On the left memu, click API keys under Preference</span>
+		</md-list-item>
+	</md-list>
+</div>

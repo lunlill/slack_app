@@ -1,0 +1,51 @@
+<div ng-cloak>
+	<form ng-submit="authorize()" ng-if="!auth">
+		<div layout="row">
+			<md-input-container flex="50">
+				<label>Enter Password</label>
+				<input required type="text" name="password" ng-model="password.input" />
+
+				<div ng-messages="password.$error" role="alert">
+					<div ng-message-exp="['required']">
+						Password required.
+					</div>
+				</div>
+			</md-input-container>
+			<div flex="50">
+				<p class="error" ng-if="errors">*{{ errors }}</p>
+			</div>
+		</div>
+
+		<md-button class="md-accent md-raised">Submit</md-button>
+	</form>
+
+	<md-card ng-if="auth">
+		<md-input-container>
+			<label>Filter: Email</label>
+			<input type="text" name="search" ng-model="search.pw_email" />
+		</md-input-container>
+
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+						<th md-column ng-click="sortBy('account_id')">Account ID</th>
+						<th md-column ng-click="sortBy('pw_email')">ProsperWorks Email</th>
+						<th md-column ng-click="sortBy('slack_url')">Slack URL</th>
+						<th md-column ng-click="sortBy('topics')">Topics</th>
+						<th md-column>Action</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="account in accounts | filter:search | orderBy:propertyName:reverse">
+						<td md-cell>{{ account.account_id }}</td>
+						<td md-cell>{{ account.pw_email }}</td>
+						<td md-cell>{{ account.slack_url }}</td>
+						<td md-cell>{{ account.topics }}</td>
+						<td md-cell><md-button class="md-accent" ng-click="deleteAccount(account)">Delete</md-button></td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+</div>
