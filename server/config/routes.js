@@ -164,7 +164,7 @@ module.exports = function(app){
 						});
 					}
 
-					if (++count == 3) {
+					if (++count == 21) {
 						console.log('10 mins time-out');
 						clearInterval(intervalID);
 
@@ -229,7 +229,7 @@ module.exports = function(app){
 						});						
 					}
 				});
-			}, 20000);
+			}, 30000);
 
 		});
 	})
@@ -436,7 +436,7 @@ module.exports = function(app){
 						});
 					}
 
-					if (++count == 3) {
+					if (++count == 21) {
 						console.log('10 mins time-out');
 						clearInterval(intervalID);
 
@@ -541,7 +541,7 @@ module.exports = function(app){
 						});	
 					}
 				});
-			}, 20000);
+			}, 30000);
 			
 		});
 	})
@@ -816,7 +816,7 @@ module.exports = function(app){
 						}
 					}
 
-					if (++count == 3) {
+					if (++count == 21) {
 						console.log('10 mins time-out');
 						clearInterval(intervalID);
 
@@ -930,7 +930,7 @@ module.exports = function(app){
 						}
 					}
 				});
-			}, 20000);
+			}, 30000);
 
 		});
 	})
