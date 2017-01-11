@@ -22,23 +22,20 @@ module.exports = function(app){
 				url: 'https://api.prosperworks.com/developer_api/v1/leads/' + req.body.ids[0],
 				headers: pw_header
 			};
-			
-			var count = 1;
-			var intervalID = setInterval(function() {
 
+			var count = 1;
+			(function checkAssignee() {
 				request(get_lead, function(error1, response1, body1) {
 					console.log('Checking times:', count);
 					let lead = JSON.parse(body1);
 
 					if (!lead.id) {
 						console.log('Error getting lead', JSON.stringify(error1));
-						clearInterval(intervalID);
 						return res.status(404).send('Error');
 					}
 
-					if (lead.assignee_id) {
+					else if (lead.assignee_id) {
 						console.log('Found assignee!');
-						clearInterval(intervalID);
 
 						var post_slack_body = {
 							text: ':dart: A new lead has been created and no assignee.\n<https://app.prosperworks.com/companies/' + req.params.id + '/app?p=db#/lead/' + req.body.ids[0] + '|View this lead>',
@@ -165,9 +162,8 @@ module.exports = function(app){
 						});
 					}
 
-					if (++count == 31) {
+					else if (++count == 32) {
 						console.log('10 mins time-out');
-						clearInterval(intervalID);
 
 						var post_slack_body = {
 							text: ':dart: A new lead has been created and no assignee.\n<https://app.prosperworks.com/companies/' + req.params.id + '/app?p=db#/lead/' + req.body.ids[0] + '|View this lead>',
@@ -229,8 +225,12 @@ module.exports = function(app){
 							}
 						});						
 					}
+
+					else {
+						setTimeout(checkAssignee, 20 * 1000);
+					}
 				});
-			}, 20000);
+			})();
 
 		});
 	})
@@ -255,20 +255,18 @@ module.exports = function(app){
 			};
 
 			var count = 1;
-			var intervalID = setInterval(function() {
+			(function checkAssignee() {
 				request(get_opportunity, function(error1, response1, body1) {
 					console.log('Checking times:', count);
 					let opportunity = JSON.parse(body1);
 
 					if (!opportunity.id) {
 						console.log('Error getting opportunity', JSON.stringify(error1));
-						clearInterval(intervalID);
 						return res.status(404).send('Error');
 					}
 
-					if (opportunity.assignee_id) {
+					else if (opportunity.assignee_id) {
 						console.log('Found assignee!');
-						clearInterval(intervalID);
 
 						let get_contact = {
 							url: 'https://api.prosperworks.com/developer_api/v1/people/' + opportunity.primary_contact_id,
@@ -438,9 +436,8 @@ module.exports = function(app){
 						});
 					}
 
-					if (++count == 31) {
+					else if (++count == 32) {
 						console.log('10 mins time-out');
-						clearInterval(intervalID);
 
 						let get_contact = {
 							url: 'https://api.prosperworks.com/developer_api/v1/people/' + opportunity.primary_contact_id,
@@ -542,8 +539,12 @@ module.exports = function(app){
 							}
 						});	
 					}
+
+					else {
+						setTimeout(checkAssignee, 20 * 1000);
+					}
 				});
-			}, 20000);
+			})();
 			
 		});
 	})
@@ -569,20 +570,18 @@ module.exports = function(app){
 			
 
 			var count = 1;
-			var intervalID = setInterval(function() {
+			(function checkAssignee() {
 				request(get_task, function(error1, response1, body1) {
 					console.log('Checking times:', count);
 					let task = JSON.parse(body1);
 
 					if (!task.id) {
 						console.log('Error getting task', JSON.stringify(body1));
-						clearInterval(intervalID);
 						return res.status(404).send('Error');
 					}
 
-					if (task.assignee_id) {
+					else if (task.assignee_id) {
 						console.log('Found assignee!');
-						clearInterval(intervalID);
 
 						var post_slack_body = {
 							text: ':white_check_mark: A new task has been created and no assignee.\n<https://app.prosperworks.com/companies/' + req.params.id + '/app?p=db#/tasks/default/task/' + req.body.ids[0] + '|View this task>',
@@ -819,9 +818,8 @@ module.exports = function(app){
 						}
 					}
 
-					if (++count == 31) {
+					else if (++count == 32) {
 						console.log('10 mins time-out');
-						clearInterval(intervalID);
 
 						var post_slack_body = {
 							text: ':white_check_mark: A new task has been created and no assignee.\n<https://app.prosperworks.com/companies/' + req.params.id + '/app?p=db#/tasks/default/task/' + req.body.ids[0] + '|View this task>',
@@ -932,15 +930,18 @@ module.exports = function(app){
 							});
 						}
 					}
+
+					else {
+						setTimeout(checkAssignee, 20 * 1000);
+					}
 				});
-			}, 20000);
+			})();
 
 		});
 	})
 
 	app.post('/slack_commands/weather', function(req, res) {
-		console.log(req.body);
-		if(req.body.token != 'KQy2MBTwn08A00kw2KNbsWLT' && req.body.token != 'D99U0A985oLX6T4kHgsSE8lK') {
+		if(req.body.token != 'KQy2MBTwn08A00kw2KNbsWLT' && req.body.token != 'KQH210Te1KWcpl0o98idPLmk') {
 			res.status(400).send('Bad Request');
 		}
 		else {
