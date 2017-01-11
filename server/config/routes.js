@@ -939,6 +939,7 @@ module.exports = function(app){
 	})
 
 	app.post('/slack_commands/weather', function(req, res) {
+		console.log(req.body);
 		if(req.body.token != 'KQy2MBTwn08A00kw2KNbsWLT' && req.body.token != 'D99U0A985oLX6T4kHgsSE8lK') {
 			res.status(400).send('Bad Request');
 		}
@@ -949,7 +950,6 @@ module.exports = function(app){
 
 			request(get_weather, function(err, response, body) {
 				body = JSON.parse(body);
-				console.log(body);
 				if(body == undefined) {
 					res.status(404).send('Weather info not found');
 					return;
