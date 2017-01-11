@@ -3,8 +3,8 @@ app.controller('homeController', ['$scope', 'accountsFactory', '$location', '$ro
 	$scope.errors = {};
 
 	if ($routeParams.code) {
-		accountsFactory.getAppInfo(function(data) {
-			var auth_code = data;
+		accountsFactory.getAppInfo(function(app_info) {
+			var auth_code = app_info;
 			auth_code.code = $routeParams.code;
 			accountsFactory.exchangeToken(auth_code, function(data) {
 				if(!data.ok) {
@@ -13,6 +13,7 @@ app.controller('homeController', ['$scope', 'accountsFactory', '$location', '$ro
 				else {
 					$scope.account.slack_token = data.access_token;
 					$scope.account.slack_url = data.incoming_webhook.url;
+					$scope.account.slack_id = data.team_id;
 				}
 			});
 		});

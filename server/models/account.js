@@ -11,6 +11,9 @@ var AccountSchema = new mongoose.Schema({
 	pw_token: {
 		type: String
 	},
+	slack_id: {
+		type: String
+	},
 	slack_token: {
 		type: String
 	},

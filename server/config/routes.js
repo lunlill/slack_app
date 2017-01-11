@@ -1087,9 +1087,13 @@ module.exports = function(app){
 	})
 
 	app.get('/api/app_info', function(req, res) {
+		// res.json({
+		// 	'client_id': process.env.client_id,
+		// 	'client_secret': process.env.client_secret
+		// });
 		res.json({
-			'client_id': process.env.client_id,
-			'client_secret': process.env.client_secret
+			'client_id': '116958211109.116195389729',
+			'client_secret': '42a860ac297d4e1fadfc0333f133e035'
 		});
 	})
 	app.post('/api/password', function(req, res) {
