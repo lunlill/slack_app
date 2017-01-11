@@ -949,6 +949,7 @@ module.exports = function(app){
 
 			request(get_weather, function(err, response, body) {
 				body = JSON.parse(body);
+				console.log(body);
 				if(body == undefined) {
 					res.status(404).send('Weather info not found');
 					return;
