@@ -237,7 +237,7 @@ module.exports = function(app){
 
 	app.post('/opportunity/:id', function(req, res) {
 
-		accounts.get_account(req.params.id, function(account) {
+		accounts.get_account_pw(req.params.id, function(account) {
 			if(account == null) {
 				return res.status(406).send('Not Acceptable');
 			}
@@ -551,7 +551,7 @@ module.exports = function(app){
 
 	app.post('/task/:id', function(req, res) {
 
-		accounts.get_account(req.params.id, function(account) {
+		accounts.get_account_pw(req.params.id, function(account) {
 			if(account == null) {
 				return res.status(406).send('Not Acceptable');
 			}
@@ -1036,7 +1036,6 @@ module.exports = function(app){
 					'X-PW-UserEmail': account.pw_email,
 					'X-PW-AccessToken': account.pw_token
 				}
-				console.log(pw_key);
 
 				let people_query = {
 					url: 'https://api.prosperworks.com/developer_api/v1/people/search',
@@ -1050,7 +1049,11 @@ module.exports = function(app){
 						console.log('Error getting people', err);
 					}
 					else {
-						console.log(body, body[0]);
+						// var left = 0;
+						// var right = people.length - 1;
+						// while() {
+
+						// }
 					}
 				});
 			});
