@@ -1045,11 +1045,12 @@ module.exports = function(app){
 				}
 
 				request(people_query, function(err, response, body) {
+					let people = JSON.parse(body);
 					if(err) {
 						console.log('Error getting people', err);
 					}
 					else {
-						console.log(body[0], req.body.text);
+						console.log(body, body[0]);
 					}
 				});
 			});
