@@ -27,6 +27,7 @@ module.exports = function(app){
 			var intervalID = setInterval(function() {
 
 				request(get_lead, function(error1, response1, body1) {
+					console.log('Checking times:', count);
 					let lead = JSON.parse(body1);
 
 					if (!lead.id) {
@@ -164,7 +165,7 @@ module.exports = function(app){
 						});
 					}
 
-					if (++count == 21) {
+					if (++count == 31) {
 						console.log('10 mins time-out');
 						clearInterval(intervalID);
 
@@ -229,7 +230,7 @@ module.exports = function(app){
 						});						
 					}
 				});
-			}, 30000);
+			}, 20000);
 
 		});
 	})
@@ -256,6 +257,7 @@ module.exports = function(app){
 			var count = 1;
 			var intervalID = setInterval(function() {
 				request(get_opportunity, function(error1, response1, body1) {
+					console.log('Checking times:', count);
 					let opportunity = JSON.parse(body1);
 
 					if (!opportunity.id) {
@@ -436,7 +438,7 @@ module.exports = function(app){
 						});
 					}
 
-					if (++count == 21) {
+					if (++count == 31) {
 						console.log('10 mins time-out');
 						clearInterval(intervalID);
 
@@ -541,7 +543,7 @@ module.exports = function(app){
 						});	
 					}
 				});
-			}, 30000);
+			}, 20000);
 			
 		});
 	})
@@ -569,6 +571,7 @@ module.exports = function(app){
 			var count = 1;
 			var intervalID = setInterval(function() {
 				request(get_task, function(error1, response1, body1) {
+					console.log('Checking times:', count);
 					let task = JSON.parse(body1);
 
 					if (!task.id) {
@@ -816,7 +819,7 @@ module.exports = function(app){
 						}
 					}
 
-					if (++count == 21) {
+					if (++count == 31) {
 						console.log('10 mins time-out');
 						clearInterval(intervalID);
 
@@ -930,7 +933,7 @@ module.exports = function(app){
 						}
 					}
 				});
-			}, 30000);
+			}, 20000);
 
 		});
 	})
