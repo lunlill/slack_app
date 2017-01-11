@@ -66,8 +66,19 @@ function AccountsController(){
 		});
 	};
 
-	this.get_account = function(id, callback) {
+	this.get_account_pw = function(id, callback) {
 		Account.findOne({account_id: id}, function(err, account) {
+			if(err){
+				callback({error: true, errors: err});
+			}
+			else {
+				callback(account);
+			}
+		});
+	};
+
+	this.get_account_slack = function(id, callback) {
+		Account.findOne({slack_id: id}, function(err, account) {
 			if(err){
 				callback({error: true, errors: err});
 			}

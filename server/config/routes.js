@@ -6,7 +6,7 @@ var accounts = require('../controllers/accounts.js');
 module.exports = function(app){
 	app.post('/lead/:id', function(req, res) {
 
-		accounts.get_account(req.params.id, function(account) {
+		accounts.get_account_pw(req.params.id, function(account) {
 			if(account == null) {
 				return res.status(406).send('Not Acceptable');
 			}
@@ -1020,6 +1020,32 @@ module.exports = function(app){
 				}
 				
 				res.status(200).json(weather_info);
+			});
+		}
+	})
+
+	app.post('/slack_commands/people', function(req, res) {
+		if(req.body.token != 'KQH210Te1KWcpl0o98idPLmk') {
+			res.status(400).send('Bad Request');
+		}
+		else {
+			accounts.get_account_slack(req.body.team_id, function(account) {
+				let pw_key = {
+					'Content-Type': 'application/json',
+					'X-PW-Application': 'developer_api',
+					'X-PW-UserEmail': account.pw_email,
+					'X-PW-AccessToken': account.pw_token
+				}
+
+				let people_query = {
+					url: 'https://api.prosperworks.com/developer_api/v1/people/search',
+					headers: pw_key,
+					method: 'POST'
+				}
+
+				request(people_query, function(err, response, body) {
+					console.log(body[0].name, req.body.text);
+				});
 			});
 		}
 	})

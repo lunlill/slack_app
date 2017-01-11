@@ -14,7 +14,7 @@ app.controller('indexController', ['$scope', 'accountsFactory', '$location', fun
 	$scope.deleteAccount = function(account) {
 		var pw_key = {
 			'Content-Type': 'application/json',
-			'X-PW-Application': 'developer_api',
+			'X-PW-Application': 'developer_api'
 		};
 		pw_key['X-PW-UserEmail'] = account.pw_email;
 		pw_key['X-PW-AccessToken'] = account.pw_token;
