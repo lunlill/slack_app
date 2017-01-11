@@ -1036,6 +1036,7 @@ module.exports = function(app){
 					'X-PW-UserEmail': account.pw_email,
 					'X-PW-AccessToken': account.pw_token
 				}
+				console.log(pw_key);
 
 				let people_query = {
 					url: 'https://api.prosperworks.com/developer_api/v1/people/search',
@@ -1044,7 +1045,12 @@ module.exports = function(app){
 				}
 
 				request(people_query, function(err, response, body) {
-					console.log(body[0].name, req.body.text);
+					if(err) {
+						console.log('Error getting people', err);
+					}
+					else {
+						console.log(body[0], req.body.text);
+					}
 				});
 			});
 		}
