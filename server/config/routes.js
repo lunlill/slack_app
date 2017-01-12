@@ -1049,11 +1049,58 @@ module.exports = function(app){
 						console.log('Error getting people', err);
 					}
 					else {
-						// var left = 0;
-						// var right = people.length - 1;
-						// while() {
+						var left = 0;
+						var right = people.length - 1;
+						while(left <= right) {
+							let mid = Math.floor((left + right) / 2);
+							if(people[mid].name == req.body.text) {
+								var info = {
+									"text": people[mid].name,
+									"attachments": [
+										{
+											'color': '#3AA3E3',
+											'fields': [
+												{
+													'title': 'Phone',
+													'value': 'no phone number',
+													'short': true
+												},
+												{
+													'title': 'Email',
+													'value': 'no email address',
+													'short': true
+												},
+												{
+													'title': 'Country',
+													'value': 'no country',
+													'short': true
+												}
+											]
+										}
+									]
+								}
+								if (people[mid].phone_numbers.length != 0) {
+									info.attachments[0].fields[0].value = people[mid].phone_numbers[0].number;
+								}
+								if (people[mid].email.length != 0) {
+									info.attachments[0].fields[1].value = people[mid].emails[0].email;
+								}
+								if (people[mid].address != null && people[mid].address.country) {
+									info.attachments[0].fields[2].value = people[mid].address.country;
+								}
 
-						// }
+								return res.status(200).json(info);
+							}
+
+							else if(people[mid].name < req.body.text) {
+								left = mid + 1;
+							}
+							else {
+								right = mid - 1;
+							}
+						}
+
+						return res.status(200).json({'text': 'Record not found.'});
 					}
 				});
 			});
