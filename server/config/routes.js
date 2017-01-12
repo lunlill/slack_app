@@ -1055,38 +1055,42 @@ module.exports = function(app){
 							let mid = Math.floor((left + right) / 2);
 							if(people[mid].name == req.body.text) {
 								var info = {
-									"text": people[mid].name,
 									"attachments": [
 										{
 											'color': '#3AA3E3',
 											'fields': [
 												{
+													'title': 'Name',
+													'value': people[mid].name,
+													'short': false
+												},
+												{
 													'title': 'Phone',
 													'value': 'no phone number',
-													'short': true
+													'short': false
 												},
 												{
 													'title': 'Email',
 													'value': 'no email address',
-													'short': true
+													'short': false
 												},
 												{
 													'title': 'Country',
 													'value': 'no country',
-													'short': true
+													'short': false
 												}
 											]
 										}
 									]
 								}
 								if (people[mid].phone_numbers.length != 0) {
-									info.attachments[0].fields[0].value = people[mid].phone_numbers[0].number;
+									info.attachments[0].fields[1].value = people[mid].phone_numbers[0].number;
 								}
 								if (people[mid].emails.length != 0) {
-									info.attachments[0].fields[1].value = people[mid].emails[0].email;
+									info.attachments[0].fields[2].value = people[mid].emails[0].email;
 								}
 								if (people[mid].address != null && people[mid].address.country) {
-									info.attachments[0].fields[2].value = people[mid].address.country;
+									info.attachments[0].fields[3].value = people[mid].address.country;
 								}
 
 								return res.status(200).json(info);
