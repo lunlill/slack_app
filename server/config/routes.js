@@ -1082,7 +1082,7 @@ module.exports = function(app){
 								if (people[mid].phone_numbers.length != 0) {
 									info.attachments[0].fields[0].value = people[mid].phone_numbers[0].number;
 								}
-								if (people[mid].email.length != 0) {
+								if (people[mid].emails.length != 0) {
 									info.attachments[0].fields[1].value = people[mid].emails[0].email;
 								}
 								if (people[mid].address != null && people[mid].address.country) {
